@@ -6,4 +6,7 @@ let navOps = document.querySelector('.navop')
 function renderContentTo(domEl, theRoute){
   let allThangs = ''
   if (theRoute === 'home')
+  allContent = `
+  
+  `
 }
