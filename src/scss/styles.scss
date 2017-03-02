@@ -12,6 +12,30 @@ button {
 
 }
 
+table {
+	border-right: 3px solid black;
+	border-left: 3px solid black;
+	width: 80%;
+	text-align: center;
+	margin-left: 10%;
+	margin-right: 10%;
+}
+
+th {
+	border-top: none;
+	font-weight: lighter;
+	font-size: 24px;
+}
+
+tr {
+	padding-right: 0px;
+	border-top: 1px solid black;
+	border-spacing: 0px;
+	text-align: left;
+	font-size: 14px;
+	margin: auto;
+}
+
 #app-container {
 	font-size: medium;
 	width: 100%;
@@ -46,10 +70,15 @@ button {
 	color: #eee;
 }
 
-.display {
-
+.btn .clicked{
+	background-color: #09c;
+	color: #eee;
 }
 
-.home {
+.active{
+	display: inherit;
+}
+
+.inactive{
 	display: none;
 }
