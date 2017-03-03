@@ -9,9 +9,18 @@ let clickers = document.querySelector('.nav')
 let nowRoute = window.location.hash.slice(1)
 console.log(nowRoute)
 
+let airTrafficRouter = function(){
+  	if(nowRoute === 'undefined'){
+      nowRoute = 'home'
+    }
+  	let displayZone = document.querySelector('.display')
+  	makeActive(nowRoute)
+  	renderContentTo(displayZone, nowRoute)
+}
+
 function renderContentTo(domEl, theRoute){
   let theThings = ''
-  if(theRoute === 'home'){
+  if(theRoute === "home"){
     theThings =`
     <table class='facts'>
       <tr>
@@ -38,7 +47,7 @@ function renderContentTo(domEl, theRoute){
     domEl.innerHTML = theThings
 
   }
-  if(theRoute === 'concerts'){
+  if(theRoute === "concerts"){
       theThings += `
         <div class="panel panel-default">
           <div class="panel-body">
@@ -66,7 +75,7 @@ function renderContentTo(domEl, theRoute){
         domEl.innerHTML = theThings
       })
   }
-  if(theRoute === 'carpools'){
+  if(theRoute === "carpools"){
         theThings += `
           <div class=row>
             <div class="panel panel-default">
@@ -98,7 +107,7 @@ function renderContentTo(domEl, theRoute){
         domEl.innerHTML = theThings
       })
   }
-  if(theRoute === 'flights' ){
+  if(theRoute === "flights"){
     theThings += `
     <div class='container-fluid flights-container'>
       <div class="panel panel-default">
@@ -188,16 +197,6 @@ clickers.addEventListener('click', function(evt){
     console.log('For those about to rock!')
   }
 })
-
-let airTrafficRouter = function(){
-  	if(nowRoute === 'undefined'){
-      nowRoute = 'home'
-    }
-  	let displayZone = document.querySelector('.display')
-  	makeActive(nowRoute)
-  	renderContentTo(displayZone, nowRoute)
-}
-
 
 function makeActive(nowRoute){
 	let lastActive = document.querySelector(`[class="col-sm-3 navop active"]`)
