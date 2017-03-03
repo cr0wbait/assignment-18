@@ -6,6 +6,8 @@ let drivePools = $.getJSON('http://apis.is/rides/samferda-drivers/')
 let ridePools = $.getJSON('http://apis.is/rides/samferda-passengers/')
 let vikingMusic = $.getJSON('http://apis.is/concerts')
 let clickers = document.querySelector('.nav')
+let nowRoute = window.location.hash.slice(1)
+console.log(nowRoute)
 
 function renderContentTo(domEl, theRoute){
   let theThings = ''
@@ -117,8 +119,7 @@ function renderContentTo(domEl, theRoute){
                 <th>Origin</th>
                 <th>Airline</th>
               </thead>`
-
-  $.when(inFlights, outFlights).then(function (serverResArrivals, serverResDepartures){
+    $.when(inFlights, outFlights).then(function (serverResArrivals, serverResDepartures){
     forEach(serverResArrivals[0].results, function(thingObjay){
       theThings += `
               <tbody>
@@ -165,7 +166,7 @@ function renderContentTo(domEl, theRoute){
       </div>`
       domEl.innerHTML = theThings
   })
-  }
+    }
 }
 
 clickers.addEventListener('click', function(evt){
@@ -189,21 +190,21 @@ clickers.addEventListener('click', function(evt){
 })
 
 let airTrafficRouter = function(){
-	let nowRoute = window.location.hash.slice(1)
-	if(nowRoute.length === 0){
-    nowRoute = 'home'
-  }
-	let displayZone = document.querySelector('.display')
-	renderActive(nowRoute)
-	renderContentTo(displayZone, nowRoute)
+  	if(nowRoute === 'undefined'){
+      nowRoute = 'home'
+    }
+  	let displayZone = document.querySelector('.display')
+  	makeActive(nowRoute)
+  	renderContentTo(displayZone, nowRoute)
 }
 
-function renderActive(nowRoute){
-	let lastActive = document.querySelector('[class="navop active"]')
+
+function makeActive(nowRoute){
+	let lastActive = document.querySelector(`[class="col-sm-3 navop active"]`)
 	lastActive.classList.remove('active')
-	let nowActive = document.querySelector('[data-route="${theCurrentRoute}"]')
+	let nowActive = document.querySelector(`[class="col-sm-3 navop" data-route="${nowRoute}"]`)
 	nowActive.classList.add('active')
 }
 
-airTrafficRouter()
+airTrafficRouter();
 window.addEventListener('hashchange', airTrafficRouter)
