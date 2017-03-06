@@ -7,6 +7,9 @@ let ridePools = $.getJSON('http://apis.is/rides/samferda-passengers/')
 let vikingMusic = $.getJSON('http://apis.is/concerts')
 let clickers = document.querySelector('.nav')
 let nowRoute = window.location.hash.slice(1)
+let lastActive = document.querySelector(`[class="col-sm-3 navop active"]`)
+let nowActive = document.querySelector(`[class="col-sm-3 navop" data-route="${nowRoute}"]`)
+
 console.log(nowRoute)
 
 let airTrafficRouter = function(){
@@ -18,9 +21,9 @@ let airTrafficRouter = function(){
   	renderContentTo(displayZone, nowRoute)
 }
 
-function renderContentTo(domEl, theRoute){
+function renderContentTo(domEl, nowRoute){
   let theThings = ''
-  if(theRoute === "home"){
+  if(nowRoute === "home"){
     theThings =`
     <table class='facts'>
       <tr>
@@ -47,7 +50,7 @@ function renderContentTo(domEl, theRoute){
     domEl.innerHTML = theThings
 
   }
-  if(theRoute === "concerts"){
+  if(nowRoute === "concerts"){
       theThings += `
         <div class="panel panel-default">
           <div class="panel-body">
@@ -75,7 +78,7 @@ function renderContentTo(domEl, theRoute){
         domEl.innerHTML = theThings
       })
   }
-  if(theRoute === "carpools"){
+  if(nowRoute === "carpools"){
         theThings += `
           <div class=row>
             <div class="panel panel-default">
@@ -107,7 +110,7 @@ function renderContentTo(domEl, theRoute){
         domEl.innerHTML = theThings
       })
   }
-  if(theRoute === "flights"){
+  if(nowRoute === "flights"){
     theThings += `
     <div class='container-fluid flights-container'>
       <div class="panel panel-default">
@@ -199,9 +202,7 @@ clickers.addEventListener('click', function(evt){
 })
 
 function makeActive(nowRoute){
-	let lastActive = document.querySelector(`[class="col-sm-3 navop active"]`)
 	lastActive.classList.remove('active')
-	let nowActive = document.querySelector(`[class="col-sm-3 navop" data-route="${nowRoute}"]`)
 	nowActive.classList.add('active')
 }
 
