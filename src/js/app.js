@@ -6,19 +6,20 @@ let drivePools = $.getJSON('http://apis.is/rides/samferda-drivers/')
 let ridePools = $.getJSON('http://apis.is/rides/samferda-passengers/')
 let vikingMusic = $.getJSON('http://apis.is/concerts')
 let clickers = document.querySelector('.nav')
-let nowRoute = window.location.hash.slice(1)
 let lastActive = document.querySelector(`[class="col-sm-3 navop active"]`)
-let nowActive = document.querySelector(`[class="col-sm-3 navop" data-route="${nowRoute}"]`)
+let nowActive = document.querySelector(`[class="col-sm-3 navop"]`)
 
-console.log(nowRoute)
+
+window.location.hash = 'home'
+let nowRoute = window.location.hash.slice(1)
 
 let airTrafficRouter = function(){
   	if(nowRoute === 'undefined'){
-      nowRoute = 'home'
+      // nowRoute = 'home'
     }
   	let displayZone = document.querySelector('.display')
   	makeActive(nowRoute)
-  	renderContentTo(displayZone, nowRoute)
+  	renderContentTo(displayZone, window.location.hash.slice(1))
 }
 
 function renderContentTo(domEl, nowRoute){
@@ -183,27 +184,43 @@ function renderContentTo(domEl, nowRoute){
 
 clickers.addEventListener('click', function(evt){
   console.log('BANG')
+  let displayZone2 = document.querySelector('.display')
+  // let daRooooooooooot = window.location.hash.slice(1)
   let clickTarg = evt.target
 	let route = clickTarg.dataset.route
-	window.location.hash = route
+  window.location.hash = route
 
   if (clickTarg.classList.contains('home') === true){
     console.log('Let me go home!')
+    window.location.hash = 'home'
+    renderContentTo(displayZone2, window.location.hash.slice(1))
   }
   if (clickTarg.classList.contains('flights') === true){
     console.log("I'll fly away!")
+    window.location.hash = 'flights'
+    renderContentTo(displayZone2, window.location.hash.slice(1))
   }
   if (clickTarg.classList.contains('carpools') === true){
     console.log('Life is a highway!')
+    window.location.hash = 'carpools'
+    renderContentTo(displayZone2,window.location.hash.slice(1))
   }
   if (clickTarg.classList.contains('concerts') === true){
     console.log('For those about to rock!')
+    window.location.hash = 'concerts'
+    renderContentTo(displayZone2,window.location.hash.slice(1))
   }
 })
 
 function makeActive(nowRoute){
 	lastActive.classList.remove('active')
 	nowActive.classList.add('active')
+}
+
+function forEach(arr, cb){
+  for (var i = 0; i < arr.length; i++){
+    cb(arr[i], i, arr)
+  }
 }
 
 airTrafficRouter();
